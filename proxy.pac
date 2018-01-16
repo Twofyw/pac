@@ -20,6 +20,12 @@ function isWhiteList(url, host) {
   if (isPlainHostName(host) || shExpMatch(host, "*.cn")) {
     return true;
   }
+
+  // Skip ip addresses
+  if (shExpMatch(host, "[0-9]*.[0-9]*.[0-9]*.[0-9]*")) {
+    return true;
+  }
+
   // Search for hosts in the array whitelist
   for (var i = 0; i < whitelist.length; i++) {
     if (dnsDomainIs(host, whitelist[i])) {
